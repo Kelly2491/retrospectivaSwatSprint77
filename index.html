@@ -28,15 +28,23 @@ body {
 
 .header {
   background: linear-gradient(135deg,#1e3a8a,#7e22ce,#dc2626);
-  padding: 35px;
+  padding: 38px;
   border-radius: 22px;
   text-align: center;
   margin-bottom: 24px;
 }
 
 .header h1 {
-  font-size: 36px;
-  margin-bottom: 10px;
+  font-size: 38px;
+  margin: 0 0 10px 0;
+}
+
+.header h2 {
+  margin: 8px 0;
+}
+
+.header p {
+  margin-top: 16px;
 }
 
 .card {
@@ -57,6 +65,7 @@ input, select, textarea {
 
 textarea {
   min-height: 130px;
+  resize: vertical;
 }
 
 button {
@@ -67,6 +76,30 @@ button {
   font-weight: bold;
   cursor: pointer;
   margin-top: 12px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.question-box {
+  background: #0f172a;
+  padding: 16px;
+  border-radius: 14px;
+  margin-top: 14px;
+  margin-bottom: 10px;
+  border: 1px solid #334155;
+}
+
+.question-box h3 {
+  margin: 0 0 8px 0;
+  color: #facc15;
+}
+
+.question-box p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 16px;
 }
 
 .stage-section {
@@ -115,6 +148,7 @@ button {
 .message {
   margin-top: 14px;
   line-height: 1.4;
+  white-space: pre-wrap;
 }
 
 .vote {
@@ -135,6 +169,12 @@ button {
 
 .clear {
   background: #fb7185;
+}
+
+.admin-note {
+  color: #cbd5e1;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
 @media(max-width: 700px) {
@@ -178,7 +218,7 @@ button {
       <option>🦸 Wonder Woman</option>
     </select>
 
-    <select id="stage">
+    <select id="stage" onchange="updateQuestionBox()">
       <option value="mapa">🗺️ El Mapa de la Ciudad</option>
       <option value="villanos">💥 Los Villanos del Sprint</option>
       <option value="superpoderes">🛠️ Los Superpoderes</option>
@@ -186,12 +226,24 @@ button {
       <option value="laboratorio">🧪 Laboratorio de Mejoras</option>
     </select>
 
-    <textarea id="message" placeholder="Escribe tu aporte..."></textarea>
+    <div class="question-box">
+      <h3 id="questionTitle">🗺️ El Mapa de la Ciudad</h3>
+      <p id="questionText">¿Qué partes del Sprint 77 logramos salvar o sacar adelante como equipo?</p>
+    </div>
+
+    <textarea
+      id="message"
+      placeholder="Ejemplo: logramos estabilizar notificaciones, cerrar soporte crítico o terminar desarrollos importantes."
+    ></textarea>
 
     <div class="top-actions">
       <button onclick="sendMessage()">🚀 Enviar aporte</button>
       <button class="clear" onclick="clearAll()">🧹 Limpiar tablero</button>
     </div>
+
+    <p class="admin-note">
+      Nota: el botón “Limpiar tablero” borra todos los aportes guardados en Firebase.
+    </p>
   </div>
 
   <div class="card">
@@ -223,27 +275,32 @@ const stages = [
   {
     id: "mapa",
     title: "🗺️ El Mapa de la Ciudad",
-    question: "¿Qué partes de la ciudad logramos salvar?"
+    question: "¿Qué partes del Sprint 77 logramos salvar o sacar adelante como equipo?",
+    placeholder: "Ejemplo: logramos estabilizar notificaciones, cerrar soporte crítico o terminar desarrollos importantes."
   },
   {
     id: "villanos",
     title: "💥 Los Villanos del Sprint",
-    question: "¿Qué enemigos atacaron la misión?"
+    question: "¿Qué enemigos o problemas afectaron el Sprint 77?",
+    placeholder: "Ejemplo: urgencias inesperadas, cambios de prioridad, dependencias, bugs críticos o falta de claridad."
   },
   {
     id: "superpoderes",
     title: "🛠️ Los Superpoderes",
-    question: "¿Qué poderes usamos para sobrevivir?"
+    question: "¿Qué fortalezas usamos para sobrevivir al Sprint 77?",
+    placeholder: "Ejemplo: trabajo en equipo, rapidez, apoyo entre áreas, liderazgo, comunicación o solución de bloqueos."
   },
   {
     id: "grieta",
     title: "🚨 La Grieta Multiversal",
-    question: "¿Qué casi destruye la misión?"
+    question: "¿Qué casi destruye la misión del Sprint 77?",
+    placeholder: "Ejemplo: sobrecarga, mala comunicación, tareas poco claras, presión operativa o dependencias externas."
   },
   {
     id: "laboratorio",
     title: "🧪 Laboratorio de Mejoras",
-    question: "¿Qué gadgets necesitamos para el próximo sprint?"
+    question: "¿Qué debemos mejorar para el próximo sprint?",
+    placeholder: "Ejemplo: mejorar refinamientos, definición técnica, QA, automatización, prioridades o comunicación."
   }
 ];
 
@@ -251,6 +308,15 @@ db.on("value", (snapshot) => {
   const data = snapshot.val() || {};
   renderBoard(data);
 });
+
+function updateQuestionBox() {
+  const stageId = document.getElementById("stage").value;
+  const currentStage = stages.find(stage => stage.id === stageId);
+
+  document.getElementById("questionTitle").innerText = currentStage.title;
+  document.getElementById("questionText").innerText = currentStage.question;
+  document.getElementById("message").placeholder = currentStage.placeholder;
+}
 
 function sendMessage() {
   const name = document.getElementById("name").value.trim();
@@ -333,6 +399,8 @@ function clearAll() {
     db.remove();
   }
 }
+
+updateQuestionBox();
 </script>
 
 </body>
