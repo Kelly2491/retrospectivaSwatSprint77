@@ -4,188 +4,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Retrospectiva SWAT Sprint 77</title>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: white;
-}
-
-.container {
-  max-width: 1250px;
-  margin: auto;
-  padding: 20px;
-}
-
-.header {
-  background: linear-gradient(135deg,#1e3a8a,#7e22ce,#dc2626);
-  padding: 38px;
-  border-radius: 22px;
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.header h1 {
-  font-size: 38px;
-  margin: 0 0 10px 0;
-}
-
-.card {
-  background: #1e293b;
-  padding: 22px;
-  border-radius: 18px;
-  margin-bottom: 22px;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 13px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-}
-
-textarea {
-  min-height: 130px;
-  resize: vertical;
-}
-
-button {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 10px;
-  background: #facc15;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 12px;
-}
-
-button:hover { opacity: 0.9; }
-
-button:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-.question-box {
-  background: #0f172a;
-  padding: 16px;
-  border-radius: 14px;
-  margin-top: 14px;
-  margin-bottom: 10px;
-  border: 1px solid #334155;
-}
-
-.question-box h3 {
-  margin: 0 0 8px 0;
-  color: #facc15;
-}
-
-.question-box p {
-  margin: 0;
-  color: #cbd5e1;
-  font-size: 16px;
-}
-
-.stage-section {
-  background: #1e293b;
-  padding: 24px;
-  border-radius: 20px;
-  margin-bottom: 26px;
-  border: 1px solid #334155;
-}
-
-.stage-title {
-  font-size: 26px;
-  margin-bottom: 8px;
-  color: #facc15;
-}
-
-.stage-question {
-  color: #cbd5e1;
-  margin-bottom: 18px;
-}
-
-.stage-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-}
-
-.post {
-  background: #334155;
-  padding: 18px;
-  border-radius: 16px;
-  border: 1px solid #475569;
-}
-
-.hero {
-  color: #facc15;
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.name {
-  font-weight: bold;
-  margin-top: 6px;
-}
-
-.message {
-  margin-top: 14px;
-  line-height: 1.4;
-  white-space: pre-wrap;
-}
-
-.vote {
-  background: #60a5fa;
-  margin-top: 14px;
-}
-
-.voted {
-  background: #94a3b8;
-}
-
-.empty {
-  color: #94a3b8;
-  font-style: italic;
-}
-
-.clear-section {
-  text-align: center;
-  margin: 30px 0;
-}
-
-.clear {
-  background: #fb7185;
-  color: #111827;
-}
-
-.admin-note {
-  color: #cbd5e1;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-@media(max-width: 700px) {
-  .header h1 { font-size: 28px; }
-  .container { padding: 12px; }
-  .stage-title { font-size: 22px; }
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:white}
+.container{max-width:1250px;margin:auto;padding:20px}
+.header{background:linear-gradient(135deg,#1e3a8a,#7e22ce,#dc2626);padding:38px;border-radius:22px;text-align:center;margin-bottom:24px}
+.header h1{font-size:38px;margin:0 0 10px 0}
+.card{background:#1e293b;padding:22px;border-radius:18px;margin-bottom:22px}
+.instructions-box{background:#0f172a;padding:20px;border-radius:14px;border:1px solid #334155;line-height:1.65}
+.instructions-box h2,.instructions-box h3{color:#facc15}
+.instructions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
+.instruction-item{background:#1e293b;padding:14px;border-radius:12px;border:1px solid #334155}
+input,select,textarea{width:100%;padding:13px;margin-top:10px;border:none;border-radius:10px;font-size:16px}
+textarea{min-height:130px;resize:vertical}
+button{padding:12px 20px;border:none;border-radius:10px;background:#facc15;font-weight:bold;cursor:pointer;margin-top:12px}
+button:hover{opacity:.9}
+button:disabled{opacity:.55;cursor:not-allowed}
+.question-box{background:#0f172a;padding:16px;border-radius:14px;margin-top:14px;margin-bottom:10px;border:1px solid #334155}
+.question-box h3{margin:0 0 8px 0;color:#facc15}
+.question-box p{margin:0;color:#cbd5e1;font-size:16px}
+.stage-section{background:#1e293b;padding:24px;border-radius:20px;margin-bottom:26px;border:1px solid #334155}
+.stage-title{font-size:26px;margin-bottom:8px;color:#facc15}
+.stage-question{color:#cbd5e1;margin-bottom:18px}
+.stage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.post{background:#334155;padding:18px;border-radius:16px;border:1px solid #475569}
+.hero{color:#facc15;font-size:22px;font-weight:bold}
+.name{font-weight:bold;margin-top:6px}
+.message{margin-top:14px;line-height:1.4;white-space:pre-wrap}
+.vote{background:#60a5fa;margin-top:14px}
+.voted{background:#94a3b8}
+.empty{color:#94a3b8;font-style:italic}
+.clear-section{text-align:center;margin:30px 0}
+.clear{background:#fb7185;color:#111827}
+.admin-note{color:#cbd5e1;font-size:14px;margin-top:10px}
+@media(max-width:700px){.header h1{font-size:28px}.container{padding:12px}.stage-title{font-size:22px}}
 </style>
 </head>
-
 <body>
-
 <div class="container">
-
   <div class="header">
     <h1>🦸‍♂️ La Liga del Sprint</h1>
     <h2>SWAT Sprint 77 — Misión Rescate</h2>
@@ -193,20 +51,34 @@ button:disabled {
   </div>
 
   <div class="card">
-    <input id="name" placeholder="Tu nombre">
+    <div class="instructions-box">
+      <h2>🧭 ¿Cómo participar en la misión?</h2>
+      <p><strong>🎯 Objetivo:</strong> reflexionar juntos sobre el Sprint 77 usando una dinámica de superhéroes.</p>
+      <div class="instructions-grid">
+        <div class="instruction-item"><strong>1. Escribe tu nombre</strong><br>Así el equipo sabrá quién hizo el aporte.</div>
+        <div class="instruction-item"><strong>2. Elige tu héroe</strong><br>Selecciona el personaje con el que quieres participar.</div>
+        <div class="instruction-item"><strong>3. Selecciona una etapa</strong><br>Cada etapa tiene una pregunta guía del Sprint 77.</div>
+        <div class="instruction-item"><strong>4. Escribe tu aporte</strong><br>Responde de forma clara y concreta.</div>
+        <div class="instruction-item"><strong>5. Enviar aporte</strong><br>Tu respuesta aparecerá en vivo para todos.</div>
+        <div class="instruction-item"><strong>6. Vota</strong><br>Puedes votar por los aportes más importantes. Solo un voto por tarjeta.</div>
+      </div>
+      <h3>🧪 ¿Qué significa cada etapa?</h3>
+      <p><strong>🗺️ El Mapa de la Ciudad:</strong> logros, avances o partes del Sprint 77 que logramos sacar adelante.</p>
+      <p><strong>💥 Los Villanos del Sprint:</strong> problemas, bugs, bloqueos, urgencias o cambios que afectaron la misión.</p>
+      <p><strong>🛠️ Los Superpoderes:</strong> fortalezas del equipo como colaboración, apoyo, liderazgo, rapidez o comunicación.</p>
+      <p><strong>🚨 La Grieta Multiversal:</strong> situaciones que casi afectaron fuertemente el sprint o generaron tensión.</p>
+      <p><strong>🧪 Laboratorio de Mejoras:</strong> ideas, aprendizajes y accionables para el próximo sprint.</p>
+      <p><strong>💡 Tip:</strong> entre más específico sea tu aporte, más fácil será convertirlo en una mejora real para el equipo.</p>
+    </div>
+  </div>
 
+  <div class="card">
+    <input id="name" placeholder="Tu nombre">
     <select id="hero">
       <option value="">Selecciona tu héroe</option>
-      <option>⚡ Flash</option>
-      <option>🧠 Batman</option>
-      <option>🛡️ Capitán América</option>
-      <option>🔥 Iron Man</option>
-      <option>🕷️ Spider-Man</option>
-      <option>🟢 Hulk</option>
-      <option>🧙 Doctor Strange</option>
-      <option>🦸 Wonder Woman</option>
+      <option>⚡ Flash</option><option>🧠 Batman</option><option>🛡️ Capitán América</option><option>🔥 Iron Man</option>
+      <option>🕷️ Spider-Man</option><option>🟢 Hulk</option><option>🧙 Doctor Strange</option><option>🦸 Wonder Woman</option>
     </select>
-
     <select id="stage" onchange="updateQuestionBox()">
       <option value="mapa">🗺️ El Mapa de la Ciudad</option>
       <option value="villanos">💥 Los Villanos del Sprint</option>
@@ -214,17 +86,11 @@ button:disabled {
       <option value="grieta">🚨 La Grieta Multiversal</option>
       <option value="laboratorio">🧪 Laboratorio de Mejoras</option>
     </select>
-
     <div class="question-box">
       <h3 id="questionTitle">🗺️ El Mapa de la Ciudad</h3>
       <p id="questionText">¿Qué partes del Sprint 77 logramos salvar o sacar adelante como equipo?</p>
     </div>
-
-    <textarea
-      id="message"
-      placeholder="Ejemplo: logramos estabilizar notificaciones, cerrar soporte crítico o terminar desarrollos importantes."
-    ></textarea>
-
+    <textarea id="message" placeholder="Ejemplo: logramos estabilizar notificaciones, cerrar soporte crítico o terminar desarrollos importantes."></textarea>
     <button onclick="sendMessage()">🚀 Enviar aporte</button>
   </div>
 
@@ -239,7 +105,6 @@ button:disabled {
     <button class="clear" onclick="clearAll()">🧹 Limpiar tablero</button>
     <p class="admin-note">Este botón borra todos los aportes guardados en Firebase.</p>
   </div>
-
 </div>
 
 <script>
@@ -255,169 +120,94 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
 const db = firebase.database().ref("retroSprint77");
 
 const stages = [
-  {
-    id: "mapa",
-    title: "🗺️ El Mapa de la Ciudad",
-    question: "¿Qué partes del Sprint 77 logramos salvar o sacar adelante como equipo?",
-    placeholder: "Ejemplo: logramos estabilizar notificaciones, cerrar soporte crítico o terminar desarrollos importantes."
-  },
-  {
-    id: "villanos",
-    title: "💥 Los Villanos del Sprint",
-    question: "¿Qué enemigos o problemas afectaron el Sprint 77?",
-    placeholder: "Ejemplo: urgencias inesperadas, cambios de prioridad, dependencias, bugs críticos o falta de claridad."
-  },
-  {
-    id: "superpoderes",
-    title: "🛠️ Los Superpoderes",
-    question: "¿Qué fortalezas usamos para sobrevivir al Sprint 77?",
-    placeholder: "Ejemplo: trabajo en equipo, rapidez, apoyo entre áreas, liderazgo, comunicación o solución de bloqueos."
-  },
-  {
-    id: "grieta",
-    title: "🚨 La Grieta Multiversal",
-    question: "¿Qué casi destruye la misión del Sprint 77?",
-    placeholder: "Ejemplo: sobrecarga, mala comunicación, tareas poco claras, presión operativa o dependencias externas."
-  },
-  {
-    id: "laboratorio",
-    title: "🧪 Laboratorio de Mejoras",
-    question: "¿Qué debemos mejorar para el próximo sprint?",
-    placeholder: "Ejemplo: mejorar refinamientos, definición técnica, QA, automatización, prioridades o comunicación."
-  }
+  {id:"mapa",title:"🗺️ El Mapa de la Ciudad",question:"¿Qué partes del Sprint 77 logramos salvar o sacar adelante como equipo?",placeholder:"Ejemplo: logramos estabilizar notificaciones, cerrar soporte crítico o terminar desarrollos importantes."},
+  {id:"villanos",title:"💥 Los Villanos del Sprint",question:"¿Qué enemigos o problemas afectaron el Sprint 77?",placeholder:"Ejemplo: urgencias inesperadas, cambios de prioridad, dependencias, bugs críticos o falta de claridad."},
+  {id:"superpoderes",title:"🛠️ Los Superpoderes",question:"¿Qué fortalezas usamos para sobrevivir al Sprint 77?",placeholder:"Ejemplo: trabajo en equipo, rapidez, apoyo entre áreas, liderazgo, comunicación o solución de bloqueos."},
+  {id:"grieta",title:"🚨 La Grieta Multiversal",question:"¿Qué casi destruye la misión del Sprint 77?",placeholder:"Ejemplo: sobrecarga, mala comunicación, tareas poco claras, presión operativa o dependencias externas."},
+  {id:"laboratorio",title:"🧪 Laboratorio de Mejoras",question:"¿Qué debemos mejorar para el próximo sprint?",placeholder:"Ejemplo: mejorar refinamientos, definición técnica, QA, automatización, prioridades o comunicación."}
 ];
 
-db.on("value", (snapshot) => {
-  const data = snapshot.val() || {};
-  renderBoard(data);
-});
+db.on("value", snapshot => renderBoard(snapshot.val() || {}));
 
-function updateQuestionBox() {
-  const stageId = document.getElementById("stage").value;
-  const currentStage = stages.find(stage => stage.id === stageId);
-
-  document.getElementById("questionTitle").innerText = currentStage.title;
-  document.getElementById("questionText").innerText = currentStage.question;
-  document.getElementById("message").placeholder = currentStage.placeholder;
+function updateQuestionBox(){
+  const stageId=document.getElementById("stage").value;
+  const currentStage=stages.find(stage=>stage.id===stageId);
+  document.getElementById("questionTitle").innerText=currentStage.title;
+  document.getElementById("questionText").innerText=currentStage.question;
+  document.getElementById("message").placeholder=currentStage.placeholder;
 }
 
-function sendMessage() {
-  const name = document.getElementById("name").value.trim();
-  const hero = document.getElementById("hero").value;
-  const stage = document.getElementById("stage").value;
-  const message = document.getElementById("message").value.trim();
-
-  if (!name || !hero || !message) {
-    alert("Completa nombre, héroe y aporte.");
-    return;
-  }
-
-  db.push({
-    name,
-    hero,
-    stage,
-    message,
-    votes: 0,
-    createdAt: Date.now()
-  });
-
-  document.getElementById("message").value = "";
+function sendMessage(){
+  const name=document.getElementById("name").value.trim();
+  const hero=document.getElementById("hero").value;
+  const stage=document.getElementById("stage").value;
+  const message=document.getElementById("message").value.trim();
+  if(!name || !hero || !message){alert("Completa nombre, héroe y aporte.");return;}
+  db.push({name,hero,stage,message,votes:0,createdAt:Date.now()});
+  document.getElementById("message").value="";
 }
 
-function getVotedCards() {
-  return JSON.parse(localStorage.getItem("retroSprint77_votedCards") || "[]");
-}
-
-function saveVotedCard(id) {
-  const votedCards = getVotedCards();
-  if (!votedCards.includes(id)) {
+function getVotedCards(){return JSON.parse(localStorage.getItem("retroSprint77_votedCards") || "[]");}
+function saveVotedCard(id){
+  const votedCards=getVotedCards();
+  if(!votedCards.includes(id)){
     votedCards.push(id);
-    localStorage.setItem("retroSprint77_votedCards", JSON.stringify(votedCards));
+    localStorage.setItem("retroSprint77_votedCards",JSON.stringify(votedCards));
   }
 }
+function hasVoted(id){return getVotedCards().includes(id);}
 
-function hasVoted(id) {
-  return getVotedCards().includes(id);
-}
-
-function vote(id, currentVotes) {
-  if (hasVoted(id)) {
-    alert("Ya votaste por esta tarjeta. Solo puedes votar una vez.");
-    return;
-  }
-
-  firebase.database().ref("retroSprint77/" + id).update({
-    votes: currentVotes + 1
-  });
-
+function vote(id,currentVotes){
+  if(hasVoted(id)){alert("Ya votaste por esta tarjeta. Solo puedes votar una vez.");return;}
+  firebase.database().ref("retroSprint77/"+id).update({votes:currentVotes+1});
   saveVotedCard(id);
 }
 
-function renderBoard(data) {
-  const board = document.getElementById("board");
-  board.innerHTML = "";
-
-  stages.forEach(stage => {
-    const section = document.createElement("section");
-    section.className = "stage-section";
-
-    const items = Object.entries(data)
-      .filter(([id, item]) => item.stage === stage.id || item.stage === stage.title)
-      .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
-
-    section.innerHTML = `
-      <div class="stage-title">${stage.title}</div>
-      <div class="stage-question">${stage.question}</div>
-    `;
-
-    if (items.length === 0) {
-      section.innerHTML += `<p class="empty">Aún no hay aportes en esta etapa.</p>`;
+function renderBoard(data){
+  const board=document.getElementById("board");
+  board.innerHTML="";
+  stages.forEach(stage=>{
+    const section=document.createElement("section");
+    section.className="stage-section";
+    const items=Object.entries(data)
+      .filter(([id,item])=>item.stage===stage.id || item.stage===stage.title)
+      .sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
+    section.innerHTML=`<div class="stage-title">${stage.title}</div><div class="stage-question">${stage.question}</div>`;
+    if(items.length===0){
+      section.innerHTML+=`<p class="empty">Aún no hay aportes en esta etapa.</p>`;
     } else {
-      const grid = document.createElement("div");
-      grid.className = "stage-grid";
-
-      items.forEach(([id, item]) => {
-        const alreadyVoted = hasVoted(id);
-        const post = document.createElement("div");
-        post.className = "post";
-
-        post.innerHTML = `
+      const grid=document.createElement("div");
+      grid.className="stage-grid";
+      items.forEach(([id,item])=>{
+        const alreadyVoted=hasVoted(id);
+        const post=document.createElement("div");
+        post.className="post";
+        post.innerHTML=`
           <div class="hero">${item.hero}</div>
           <div class="name">${item.name}</div>
           <div class="message">${item.message}</div>
-          <button 
-            class="vote ${alreadyVoted ? "voted" : ""}" 
-            onclick="vote('${id}', ${item.votes || 0})"
-            ${alreadyVoted ? "disabled" : ""}
-          >
+          <button class="vote ${alreadyVoted ? "voted" : ""}" onclick="vote('${id}', ${item.votes || 0})" ${alreadyVoted ? "disabled" : ""}>
             ${alreadyVoted ? "✅ Ya votaste" : "🏆 Votar"} (${item.votes || 0})
-          </button>
-        `;
-
+          </button>`;
         grid.appendChild(post);
       });
-
       section.appendChild(grid);
     }
-
     board.appendChild(section);
   });
 }
 
-function clearAll() {
-  const ok = confirm("¿Seguro que deseas borrar todos los aportes?");
-  if (ok) {
+function clearAll(){
+  const ok=confirm("¿Seguro que deseas borrar todos los aportes?");
+  if(ok){
     db.remove();
     localStorage.removeItem("retroSprint77_votedCards");
   }
 }
-
 updateQuestionBox();
 </script>
-
 </body>
 </html>
